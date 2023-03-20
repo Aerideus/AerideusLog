@@ -4,6 +4,8 @@
 
 #include "../include/aerideus_log.h"
 
+#include <stdio.h>
+
 #ifdef AE_WINDOWS
 
 #include <Windows.h>

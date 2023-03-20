@@ -47,4 +47,4 @@ project "Sandbox"
     files { "Sandbox/src/*.c", "Sandbox/src/*.h" }
     includedirs { "AerideusLog/include" }
 
-    links { "AeridesLog" }
+    links { "AerideusLog" }
