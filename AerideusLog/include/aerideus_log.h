@@ -492,3 +492,14 @@ void i_ae_log_console(log_level l, const char* fn, int ln, const char* f, ...);
 #define AE_LOG_CONSOLE_DIST_FATAL(f, ...) i_ae_log_console(FATAL, I_AE_LOCATION, f, ##__VA_ARGS__)
 
 #endif // AE_DIST
+
+// File ---------------------------------------------------------------------------------------------------------
+
+/// <summary>
+/// Internal function that should only be called through macros. (AE_LOG_CONSOLE_...)
+/// </summary>
+/// <param name="l">should not be specified</param>
+/// <param name="fn">should not be specified</param>
+/// <param name="ln">should not be specified</param>
+/// <param name="f">should not be specified</param>
+void i_ae_log_file(log_level l, const char* fn, int ln, const char* f, ...);
