@@ -1,3 +1,7 @@
+/*
+	Author @rasmushugosson
+*/
+
 #include "../include/aerideus_log.h"
 
 static log_level s_level = TRACE;
