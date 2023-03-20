@@ -1,5 +1,6 @@
 /*
-	Author @rasmushugosson
+	Author: @rasmushugosson
+	Last modified: 2023-03-20
 */
 
 #include "../include/aerideus_log.h"
