@@ -1,6 +1,6 @@
 # Aerideus Log
 
-Aerideus Log is a lightweight and easy to use library for console and file logging.
+Aerideus Log is a lightweight and easy to use library for console and file logging. All logging can be done for a specific build type to allow debug messages with no impact on performance when the project is built to be released, without having to change any code. Additionally, the logs include extra information about the severity of the message, where the message was sent from and with different colors to improve readability.
 
 <br>
 
@@ -79,6 +79,8 @@ All console logging is done through *macros* of the format `AE_LOG_CONSOLE_[Buil
 
 The *build type* and *severity level* can be omitted. In cases where the severity level is omitted, it must instead be specified as an argument and the format of the macros is then `AE_LOG_CONSOLE_[Build Type](log_level level, const char* message)`. In cases where the build type is omitted, the logging will be done regardless of the current build type and the format is then `AE_LOG_CONSOLE_[Severity](const char* message)`.
 
+To make the console output more readable, a blank line can be logged at any point. This can be done through *macros* of the format `AE_LOG_CONSOLE_NEXT_LINE_[Build Type]()`. *Build type* refers to the build type that must currently be selected for the blank line to be inserted. The *build type* can be omitted and the macro is then `AE_LOG_CONSOLE_NEXT_LINE()`.
+
 ### Console examples
 
 ```c
@@ -93,6 +95,12 @@ AE_LOG_CONSOLE_INFO("Information");
 
 // Logs "Information" to the console with severity level INFO, only if the current build type is Debug. 
 AE_LOG_CONSOLE_DEBUG_INFO("Information");
+
+// Logs a blank line to the console regardless of build type.
+AE_LOG_CONSOLE_NEXT_LINE();
+
+// Logs a blank line to the console only if the current build type is Debug.
+AE_LOG_CONSOLE_NEXT_LINE_DEBUG();
 ```
 
 <br>
@@ -101,9 +109,11 @@ AE_LOG_CONSOLE_DEBUG_INFO("Information");
 
 ## File logging
 
-All file logging is done through *macros* of the format `AE_LOG_FILE_[Build Type]_[Severity](const char* message)`. *Build type* refers to the build type that must currently be selected for the logging to be performed. *Severity refers to the desired severity that the message should be logged with.
+All file logging is done through *macros* of the format `AE_LOG_FILE_[Build Type]_[Severity](const char* message)`. *Build type* refers to the build type that must currently be selected for the logging to be performed. *Severity* refers to the desired severity that the message should be logged with.
 
 The *build type* and *severity level* can be omitted. In cases where the severity level is omitted, it must instead be specified as an argument and the format of the macros is then `AE_LOG_FILE_[Build Type](log_level level, const char* message)`. In cases where the build type is omitted, the logging will be done regardless of the current build type and the format is then `AE_LOG_FILE_[Severity](const char* message)`.
+
+To make the log file more readable, a blank line can be logged at any point. This can be done through *macros* of the format `AE_LOG_FILE_NEXT_LINE_[Build Type]()`. *Build type* refers to the build type that must currently be selected for the blank line to be inserted. The *build type* can be omitted and the macro is then `AE_LOG_FILE_NEXT_LINE()`.
 
 ### File examples
 
@@ -119,6 +129,12 @@ AE_LOG_FILE_INFO("Information");
 
 // Logs "Information" to the log file with severity level INFO, only if the current build type is Debug. 
 AE_LOG_FILE_DEBUG_INFO("Information");
+
+// Logs a blank line to the log file regardless of build type.
+AE_LOG_FILE_NEXT_LINE();
+
+// Logs a blank line to the log file only if the current build type is Debug.
+AE_LOG_FILE_NEXT_LINE_DEBUG();
 ```
 
 ### Exporting
