@@ -37,6 +37,8 @@
 	Copyright (c) 2023 Aerideus
 */
 
+#include <stdio.h>
+
 // Severity level -----------------------------------------------------------------------------------------------
 
 /// <summary>
@@ -528,6 +530,63 @@ void i_ae_log_console(log_level l, const char* fn, int ln, const char* f, ...);
 
 #endif // AE_DIST
 
+/// <summary>
+/// Logs a blank line to the console regardless of build type.
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE() printf("\n")
+
+#ifdef AE_DEBUG
+
+/// <summary>
+/// Logs a blank line to the console when the build type is Debug.
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_DEBUG() printf("\n")
+/// <summary>
+/// Logs a blank line to the console when the build type is Release. (Removed since build type is currently Debug)
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_RELEASE()
+/// <summary>
+/// Logs a blank line to the console when the build type is Dist. (Removed since build type is currently Debug)
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_DIST()
+
+#endif // AE_DEBUG
+
+#ifdef AE_RELEASE
+
+/// <summary>
+/// Logs a blank line to the console when the build type is Debug. (Removed since build type is currently Release)
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_DEBUG() 
+/// <summary>
+/// Logs a blank line to the console when the build type is Release.
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_RELEASE() printf("\n")
+/// <summary>
+/// Logs a blank line to the console when the build type is Dist. (Removed since build type is currently Release)
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_DIST()
+
+#endif // AE_RELEASE
+
+#ifdef AE_DIST
+
+/// <summary>
+/// Logs a blank line to the console when the build type is Debug. (Removed since build type is currently Dist)
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_DEBUG()
+/// <summary>
+/// Logs a blank line to the console when the build type is Release. (Removed since build type is currently Dist)
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_RELEASE()
+/// <summary>
+/// Logs a blank line to the console when the build type is Dist.
+/// </summary>
+#define AE_LOG_CONSOLE_NEXT_LINE_DIST() printf("\n")
+
+#endif // AE_DIST
+
+
 // File ---------------------------------------------------------------------------------------------------------
 
 /// <summary>
@@ -993,3 +1052,63 @@ void ae_log_file_export(const char* p);
 
 #endif // AE_DIST
 
+/// <summary>
+/// Internal function that should only be called through macros. (AE_LOG_FILE_NEXT_LINE_...)
+/// </summary>
+void i_ae_log_file_next_line();
+
+/// <summary>
+/// Logs a blank line to the log file regardless of build type.
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE() i_ae_log_file_next_line()
+
+#ifdef AE_DEBUG
+
+/// <summary>
+/// Logs a blank line to the log file when the build type is Debug.
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_DEBUG() i_ae_log_file_next_line()
+/// <summary>
+/// Logs a blank line to the log file when the build type is Release. (Removed since build type is currently Debug)
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_RELEASE()
+/// <summary>
+/// Logs a blank line to the log file when the build type is Dist. (Removed since build type is currently Debug)
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_DIST()
+
+#endif // AE_DEBUG
+
+#ifdef AE_RELEASE
+
+/// <summary>
+/// Logs a blank line to the log file when the build type is Debug. (Removed since build type is currently Release)
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_DEBUG() 
+/// <summary>
+/// Logs a blank line to the log file when the build type is Release.
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_RELEASE() i_ae_log_file_next_line()
+/// <summary>
+/// Logs a blank line to the log file when the build type is Dist. (Removed since build type is currently Release)
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_DIST()
+
+#endif // AE_RELEASE
+
+#ifdef AE_DIST
+
+/// <summary>
+/// Logs a blank line to the log file when the build type is Debug. (Removed since build type is currently Dist)
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_DEBUG()
+/// <summary>
+/// Logs a blank line to the log file when the build type is Release. (Removed since build type is currently Dist)
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_RELEASE()
+/// <summary>
+/// Logs a blank line to the log file when the build type is Dist.
+/// </summary>
+#define AE_LOG_FILE_NEXT_LINE_DIST() i_ae_log_file_next_line()
+
+#endif // AE_DIST

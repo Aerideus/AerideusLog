@@ -23,6 +23,9 @@ int main(void)
 	AE_LOG_CONSOLE_RELEASE_INFO("Release build!");
 	AE_LOG_CONSOLE_DIST_INFO("Distribution build!");
 
+	// Logs a blank line to the console regardless of build type
+	AE_LOG_CONSOLE_NEXT_LINE();
+
 	// Logs variables to the console regardless of build type
 	int a = 5;
 	float pi = 3.14159f;
@@ -33,10 +36,15 @@ int main(void)
 	AE_LOG_FILE_WARNING("Warning!!");
 	AE_LOG_FILE_ERROR("Error!!!");
 
+	// Logs two blank lines to the log file regardless of build type
+	AE_LOG_FILE_NEXT_LINE();
+	AE_LOG_FILE_NEXT_LINE();
+
+	// Logs another error to the log file regardless of build type
+	AE_LOG_FILE_ERROR("Error!!!");
+
 	// Exports the log file
-	// This can only be called once and should be done before termination
-	// TODO: Possibly change later
 	AE_LOG_FILE_EXPORT("log.txt");
 
-	return 1;
+	return 0;
 }

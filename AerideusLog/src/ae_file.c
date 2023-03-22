@@ -102,6 +102,27 @@ void i_ae_log_file(log_level l, const char* fn, int ln, const char* f, ...)
 	}
 }
 
+void i_ae_log_file_next_line()
+{
+	if (s_file_size == 0)
+	{
+		return;
+	}
+
+	s_file_size++;
+
+	char* data = realloc(s_file_data, s_file_size + 1);
+
+	if (data)
+	{
+		s_file_data = data;
+		s_file_data[s_file_size - 1] = '\n';
+		s_file_data[s_file_size] = '\0';
+	}
+}
+
+#undef ERROR
+
 void ae_log_file_export(const char* p)
 {
 	if (s_file_size == 0)
@@ -111,7 +132,11 @@ void ae_log_file_export(const char* p)
 
 	else if (!p)
 	{
+		AE_LOG_CONSOLE_NEXT_LINE();
+		AE_LOG_CONSOLE_ERROR("Failed to export log file because the specified path is NULL. Make sure that the specified path is in a directory that exists.");
+
 		free(s_file_data);
+		s_file_size = 0;
 		return;
 	}
 
@@ -123,7 +148,17 @@ void ae_log_file_export(const char* p)
 		fprintf_s(f, "%s", s_file_data);
 
 		fclose(f);
+
+		AE_LOG_CONSOLE_NEXT_LINE();
+		AE_LOG_CONSOLE_INFO("Log file exported to as %s.", p);
+	}
+
+	else
+	{
+		AE_LOG_CONSOLE_NEXT_LINE();
+		AE_LOG_CONSOLE_ERROR("Failed to export log file because the specified path is incorrect. Make sure that the specified path is in a directory that exists.");
 	}
 
 	free(s_file_data);
+	s_file_size = 0;
 }
